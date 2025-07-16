@@ -1,0 +1,30 @@
+# C++/CMake
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.o
+*.obj
+*.so
+*.a
+*.exe
+*.out
+*.log
+
+# VSCode
+.vscode/
+
+# CLion
+.idea/
+*.iml
+
+# Docker
+*.pid
+*.swp
+
+# 单元测试输出
+Testing/
+
+# 依赖
+third_party/ 

@@ -1,0 +1,23 @@
+stages:
+  - build
+  - test
+
+variables:
+  BUILD_DIR: build
+
+build:
+  stage: build
+  script:
+    - sudo dnf install -y git cmake gcc-c++ make curl openssl-devel
+    - mkdir -p $BUILD_DIR && cd $BUILD_DIR
+    - cmake ..
+    - make -j
+  artifacts:
+    paths:
+      - build/
+
+test:
+  stage: test
+  script:
+    - cd $BUILD_DIR
+    - ctest --output-on-failure 
