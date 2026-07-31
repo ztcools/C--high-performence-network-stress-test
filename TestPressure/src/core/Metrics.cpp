@@ -49,7 +49,22 @@ namespace testpress
         ofs << "status_code,latency_ms,success,error_msg\n";
         for (const auto &r : results_)
         {
-            ofs << r.status_code << "," << r.latency_ms << "," << r.success << "," << r.error_msg << "\n";
+            auto escape = [](const std::string &s) -> std::string
+            {
+                if (s.find_first_of(",\"\n") == std::string::npos)
+                    return s;
+                std::string escaped = "\"";
+                for (char c : s)
+                {
+                    if (c == '"')
+                        escaped += "\"\"";
+                    else
+                        escaped += c;
+                }
+                escaped += "\"";
+                return escaped;
+            };
+            ofs << r.status_code << "," << r.latency_ms << "," << r.success << "," << escape(r.error_msg) << "\n";
         }
     }
 

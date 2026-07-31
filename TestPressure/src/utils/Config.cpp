@@ -1,5 +1,6 @@
 #include "../../include/utils/Config.h"
 #include <iostream>
+#include <stdexcept>
 
 namespace testpress
 {
@@ -22,9 +23,8 @@ namespace testpress
         }
         catch (const CLI::ParseError &e)
         {
-            app.exit(e);
-            // 可以在这里添加自定义错误处理
-            exit(1);
+            std::cerr << "解析参数失败: " << e.what() << "\n使用 --help 查看帮助" << std::endl;
+            throw std::runtime_error("命令行参数解析失败");
         }
         return config;
     }
