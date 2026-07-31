@@ -1,56 +1,30 @@
 # TestPressure
 
-A high-performance C++ network stress-testing tool built with **C++17**, using epoll-based event-driven architecture and multi-threaded concurrency for HTTP load testing.
+C++ 高性能 HTTP 压测工具 — 多线程并发发包、实时延迟统计、JSON/CSV 结果导出。
 
-## Features
+## 解决什么
 
-- ✅ **Multi-threaded** — Configurable worker threads for concurrent request generation
-- ✅ **HTTP GET/POST** — Supports JSON body POST requests
-- ✅ **Real-time Metrics** — Records latency, success rate, and error messages per request
-- ✅ **Export Results** — JSON and CSV output with proper CSV escaping
-- ✅ **CLI-driven** — Full command-line argument parsing via CLI11
-- ✅ **Structured Logging** — spdlog-based colored console output
-- ✅ **Docker-ready** — Includes Dockerfile and CI pipeline (Gitee)
+需要快速评估 HTTP API 的吞吐能力和延迟分布。不用装 wrk/JMeter 等复杂工具，一个二进制直接跑，结果可编程导出。
 
-## Quick Start
+## 技术栈
+
+C++17 · CMake + FetchContent · cpr · spdlog · CLI11 · nlohmann/json · GoogleTest
+
+## 功能
+
+- 多线程并发 HTTP GET/POST 压测
+- QPS 限流（令牌桶）
+- 实时统计成功率、平均/最小/最大延迟
+- JSON / CSV 结果导出（CSV 正确转义特殊字符）
+- Docker 一键构建运行
+- Gitee CI 自动编译测试
+
+## 运行
 
 ```bash
-# Build
 cd TestPressure && mkdir build && cd build
 cmake .. && make -j$(nproc)
 
-# Run
-./testpressure -u https://example.com/api -t 8 -n 1000
-
-# Output CSV
-./testpressure -u https://example.com/api -t 4 -n 500 -o results.csv
+./TestPressure -u https://example.com/api -t 8 -n 1000
+./TestPressure -u https://example.com/api -t 4 -n 500 -o result.csv
 ```
-
-## CLI Options
-
-| Flag | Description | Default |
-|------|-------------|---------|
-| `-u, --url` | Target URL (**required**) | — |
-| `-t, --threads` | Concurrent threads | 4 |
-| `-n, --requests` | Total request count | 1000 |
-| `--qps` | Rate-limit QPS (0 = unlimited) | 0 |
-| `-X, --method` | HTTP method (GET/POST) | GET |
-| `-d, --body` | POST request body (JSON) | — |
-| `-o, --output` | Output file (.json or .csv) | — |
-
-## Dependencies
-
-- [CPR](https://github.com/libcpr/cpr) — C++ HTTP client
-- [nlohmann/json](https://github.com/nlohmann/json) — JSON parsing
-- [CLI11](https://github.com/CLIUtils/CLI11) — CLI argument parsing
-- [spdlog](https://github.com/gabime/spdlog) — Fast C++ logging
-
-## Docker
-
-```bash
-bash scripts/run_docker.sh
-```
-
-## License
-
-MIT
