@@ -1,25 +1,25 @@
 # TestPressure
 
-C++ 高性能 HTTP 压测工具 — 多线程并发发包、实时延迟统计、JSON/CSV 结果导出。
+C++ high-performance HTTP load testing tool — multi-threaded concurrent requests, real-time latency statistics, JSON/CSV result export.
 
-## 解决什么
+## What it solves
 
-需要快速评估 HTTP API 的吞吐能力和延迟分布。不用装 wrk/JMeter 等复杂工具，一个二进制直接跑，结果可编程导出。
+Quickly evaluate an HTTP API's throughput and latency distribution. No heavyweight tools like wrk/JMeter required — one binary, ready to run, with programmatically exportable results.
 
-## 技术栈
+## Tech stack
 
 C++17 · CMake + FetchContent · cpr · spdlog · CLI11 · nlohmann/json · GoogleTest
 
-## 功能
+## Features
 
-- 多线程并发 HTTP GET/POST 压测
-- QPS 限流（令牌桶）
-- 实时统计成功率、平均/最小/最大延迟
-- JSON / CSV 结果导出（CSV 正确转义特殊字符）
-- Docker 一键构建运行
-- Gitee CI 自动编译测试
+- Multi-threaded concurrent HTTP GET/POST load testing
+- QPS rate limiting (token bucket)
+- Real-time stats: success rate, average/min/max latency
+- JSON / CSV result export (special characters properly escaped in CSV)
+- One-command Docker build & run
+- Gitee CI automated build & test
 
-## 运行
+## Usage
 
 ```bash
 cd TestPressure && mkdir build && cd build
